@@ -4,4 +4,10 @@ class Post < ApplicationRecord
   validates :content, presence: true
   
   belongs_to :user
+
+  has_many :posts_categories
+  has_many :categories, :through => :posts_categories
+
+  accepts_nested_attributes_for :categories
+
 end

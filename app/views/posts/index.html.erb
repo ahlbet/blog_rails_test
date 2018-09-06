@@ -16,6 +16,7 @@
       <th>Written By</th>
       <th>Title</th>
       <th>Content</th>
+      <th>Categories</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -26,6 +27,14 @@
         <td><%= post.user_id %></td>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
+        <td>
+          <ul>
+            <% post.categories.each do |category| %>
+              <li><%= category.name %></li>
+            <% end %>
+          </ul>
+        </td>
+
         <% if user_signed_in? %>
           <td><%= link_to 'Show', post %></td>
           <td><%= link_to 'Edit', edit_post_path(post) %></td>

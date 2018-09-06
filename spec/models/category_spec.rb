@@ -12,7 +12,7 @@ describe Category do
 
   describe "associations" do
     it "should have many posts" do
-      expect(described_class.reflect_on_association(:posts)).to eq(:has_many)
+      expect(described_class.reflect_on_association(:posts).macro).to eq(:has_many)
     end
   end
 end

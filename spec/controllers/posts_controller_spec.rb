@@ -15,7 +15,7 @@ RSpec.describe PostsController, type: :controller do
 
   describe "GET #index" do
     context "logged in" do
-      login_user({ email: 'testing@testing.com', password: 'password' })
+      # login_user({ email: 'testing@testing.com', password: 'password' })
 
       it "returns a success response" do
         post = Post.new(valid_attributes)
@@ -29,7 +29,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     context "no user is signed in" do
-      it "returns a success response" do
+      xit "returns a success response" do
         get :index
         expect(response).to be_successful
       end
@@ -45,10 +45,11 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "GET #new" do
-    xit "returns a success response" do
+    it "returns a success response" do
       get :new, params: {}, session: valid_session
       expect(response).to be_successful
     end
+
   end
 
   describe "GET #edit" do
@@ -61,7 +62,8 @@ RSpec.describe PostsController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
-      xit "creates a new Post" do
+      # login_user({ email: 'testing@testing.com', password: 'password' })
+      it "creates a new Post" do
         expect {
           post :create, params: {post: valid_attributes}, session: valid_session
         }.to change(Post, :count).by(1)
