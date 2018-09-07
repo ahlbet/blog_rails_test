@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "posts/edit", type: :view do
   before(:each) do
+    @user = User.create!(email: "dylan@20spokes.com", password: "password")
     @post = assign(:post, Post.create!(
       :name => "MyString",
       :title => "MyString",
-      :content => "MyText"
+      :content => "MyText",
+      :user_id => @user.id
     ))
   end
 

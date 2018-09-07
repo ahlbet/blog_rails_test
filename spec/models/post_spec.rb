@@ -28,12 +28,5 @@ describe Post do
     it "should have many categories" do
       expect(described_class.reflect_on_association(:categories).macro).to eq(:has_many)
     end
-
-    it "should accept nested attributes for categories" do
-      # post = Post.new
-      # p post.attributes
-      # expect(described_class.attribute(:categories))
-      # expect(described_class.attribute(:users)).to be_truthy
-    end
   end
 end

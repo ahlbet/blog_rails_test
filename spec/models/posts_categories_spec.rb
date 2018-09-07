@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe PostsCategories do
+describe PostsCategory do
   describe "associations" do
     it "belongs to one post" do
       expect(described_class.reflect_on_association(:post).macro).to eq(:belongs_to)
