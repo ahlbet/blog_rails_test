@@ -1,6 +1,11 @@
 require "rails_helper"
 
 describe CategoriesController do
+
+  let(:valid_attributes) {
+    { name: 'Science' }
+  }
+
   describe "GET #index" do
     it "returns a success response" do
       get :index
@@ -35,7 +40,7 @@ describe CategoriesController do
     context "with valid params" do
       it "creates a new Category" do
         expect {
-          post :create, params: {category: { name: 'My Test' }}
+          post :create, params: {category: valid_attributes}
         }.to change(Category, :count).by(1)
       end
 

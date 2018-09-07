@@ -3,7 +3,7 @@ require 'support/controller_macros'
 
 RSpec.describe PostsController, type: :controller do
   let(:valid_attributes) {
-    { name: 'Test User', title: 'Test Title', content: 'Test Content' }
+    { name: 'Test User', title: 'Test Title', content: 'Test Content', categories_attributes: [{ name: 'Tech' }]}
   }
 
   let(:invalid_attributes) {
@@ -37,14 +37,17 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "GET #show" do
+    login_user({ email: 'testing@testing.com', password: 'password' })
     xit "returns a success response" do
       post = Post.create! valid_attributes
+      # post.user = u
       get :show, params: {id: post.to_param}, session: valid_session
       expect(response).to be_successful
     end
   end
 
   describe "GET #new" do
+    login_user({ email: 'testing@testing.com', password: 'password' })
     it "returns a success response" do
       get :new, params: {}, session: valid_session
       expect(response).to be_successful
@@ -60,16 +63,24 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
+  # TODO: Write test for strong params/creating post with categories
+
   describe "POST #create" do
     context "with valid params" do
-      # login_user({ email: 'testing@testing.com', password: 'password' })
+      login_user({ email: 'testing@testing.com', password: 'password' })
       it "creates a new Post" do
         expect {
-          post :create, params: {post: valid_attributes}, session: valid_session
+          post :create, params: {post: valid_attributes}
         }.to change(Post, :count).by(1)
       end
+      
+      it "creates a new Post with Categories" do
+        expect {
+          post :create, params: {post: valid_attributes}
+        }.to change(Category, :count).by(1)
+      end
 
-      xit "redirects to the created post" do
+      it "redirects to the created post" do
         post :create, params: {post: valid_attributes}, session: valid_session
         expect(response).to redirect_to(Post.last)
       end

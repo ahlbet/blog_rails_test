@@ -16,10 +16,12 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.create!(post_params)
-    # respond_to do |format|
-    #   format.html { redirect_to @category, notice: 'Post was successful created.' }
-    # end
+    @category = Category.create(post_params)
+    respond_to do |format|
+      if @category.save
+        format.html { redirect_to @category, notice: 'Category was successful created.' }
+      end  
+    end
   end
 
   private

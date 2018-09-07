@@ -6,7 +6,6 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     # @posts = PostPolicy::Scope.new(current_user, Post).resolve
-
     @posts = policy_scope(Post)
   end
 
@@ -18,9 +17,10 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
-    # @post.categories.new
-    # @post.categories.build
-    # authorize @post
+
+    @post.categories.build
+
+    authorize @post
   end
 
   # GET /posts/1/edit
@@ -30,10 +30,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.create!(post_params)
+    @post = Post.new(post_params)
     @post.user = current_user
-    p @post
-    # @post.attributes = :category_attributes
+
     authorize @post
 
     respond_to do |format|
@@ -80,6 +79,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :title, :content, :user_id)
+      params.require(:post).permit(:name, :title, :content, :user_id, categories_attributes: [:name])
     end
 end
