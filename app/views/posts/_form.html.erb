@@ -26,12 +26,20 @@
     <%= form.text_area :content %>
   </div>
 
-  <%= form.fields_for :categories do |category| %>
-    <div class="field">
-      <%= category.label :name %>
-      <%= category.text_field :name %>
-    </div>
-  <% end %>
+  <div id="categories">
+    <%= form.fields_for :categories do |category| %>
+      <%# <div class="field"> %>
+        <%# <%= category.label :name, "Category Name, multiple? Separate by comma" %>
+        <%# <%= category.text_field :name %>
+      <%# </div> %>
+    <%# <div> %>
+      <%= render partial: "category_fields", locals: { form: category } %>
+    <%# </div> %>
+
+    <% end %>
+  </div>  
+
+  <a href="javascript:;" id="addNewCategory">Add new category</a>
 
   <div class="actions">
     <%= form.submit %>

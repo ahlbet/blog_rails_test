@@ -4,7 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: [:standard, :admin]
+  # enum role: [:standard, :admin]
+
+  enum role: {
+    standard: 0,
+    admin: 1
+  }
 
   has_many :posts
 

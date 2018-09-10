@@ -30,8 +30,13 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    p post_params.dig :categories_attributes
+    cA = post_params.dig :categories_attributes
+    p cA[0]
     @post = Post.new(post_params)
     @post.user = current_user
+
+    # byebug
 
     authorize @post
 

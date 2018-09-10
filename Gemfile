@@ -68,3 +68,4 @@ end
 gem 'devise'
 gem 'pundit'
 gem 'rails_admin'
+gem 'jquery-rails'

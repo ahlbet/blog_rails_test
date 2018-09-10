@@ -9,7 +9,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   config.authorize_with do
-    if !current_user.admin?
+    unless current_user.admin?
       redirect_to main_app.root_path
     end
   end
