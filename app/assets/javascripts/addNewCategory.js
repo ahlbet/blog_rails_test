@@ -5,7 +5,7 @@ $(document).ready(function() {
   $('#addNewCategory').click(function() {
     numerator += 1;
 
-    let formHtml = $('.category-form').children('.category-field').last();
+    let formHtml = $('.category-form').children('.category-field').last()[0].outerHTML;
 
     let newFieldHtml = $(formHtml).clone();
 
@@ -19,6 +19,6 @@ $(document).ready(function() {
       id: `post_categories_attributes_${numerator}_name`
     });
 
-    $('.category-form').append(newFieldHtml.html());
+    $('.category-form').append(newFieldHtml)[0].outerHTML;
   });
 });
