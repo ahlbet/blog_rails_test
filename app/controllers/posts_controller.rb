@@ -30,19 +30,22 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    p post_params.dig :categories_attributes
-    cA = post_params.dig :categories_attributes
-    p cA[0]
-    @post = Post.new(post_params)
-    @post.user = current_user
+    # @post = Post.new(post_params)
+    # @post.user = current_user
 
-    # byebug
+    service_params = post_params.merge({ user: current_user })
 
-    authorize @post
+    service = Posts::CreateService.new(service_params)
+
+    # NOTE: a boolean
+    @result = service.call
+    
+    authorize @result
 
     respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+      # if @post.save
+      if @result
+        format.html { redirect_to @result, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }

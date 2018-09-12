@@ -1,1 +1,11 @@
-<p>i am the SHOW template</p>
+<%# p 'HELLO', @posts %>
+
+<%# <ul> %>
+  <% @posts.each do |post| %>
+    <% if user_signed_in? %>
+      <p><%= link_to post.name, post %></p>
+    <% else %>
+      <p><%= post.name %></p>  
+    <% end %>  
+  <% end %>
+<%# </ul> %>
